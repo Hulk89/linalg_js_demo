@@ -4,6 +4,9 @@ export default class Equation extends Component {
   setup () {
     this.$state = ""
   }
+  createElement () {
+    return document.createElement('span')
+  }
   setState (newState) {
     this.$state = newState
     this.render()

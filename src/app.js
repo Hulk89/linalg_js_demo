@@ -33,8 +33,8 @@ import Equation from "./components/equation.js";
 
 class App {
   constructor (target) {
-    this.eq_obj = new Equation(target)
-    this.eq_obj.setState("$\\frac{1}{3}$")
+    let eq_obj = new Equation(target)
+    eq_obj.setState("$\\frac{1}{3}$")
   }
 }
 
