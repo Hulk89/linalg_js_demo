@@ -28,16 +28,20 @@ function draw(svg, box, color='blue') {
   }
 }
 */
-
 import Equation from "./components/equation.js"
 import InputMatrix from "./components/matrix.js"
 import {matrix_to_latex} from "./utils/array_to_latex.js"
+import {det} from "./utils/matrix.js"
+
 
 class App {
   constructor (target) {
     let eq = document.createElement('div')
     let mat = document.createElement('div')
+    let det_div = document.createElement('div')
+
     target.appendChild(eq)
+    target.append(det_div)
     target.appendChild(mat)
     
     let eq_obj = new Equation(eq)
@@ -46,12 +50,14 @@ class App {
     let data = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
 
     eq_obj.setState({equation: matrix_to_latex(data)})
+    det_div.innerHTML = `determinant of matrix: ${det(data)}`
 
     input_matrix.setState({
         title: "아래에 matrix를 입력하세요", 
         data: data, 
         callback: (data) => {
           eq_obj.setState({equation: matrix_to_latex(data)})
+          det_div.innerHTML = `determinant of matrix: ${det(data)}`
         }
       })
   }
