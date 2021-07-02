@@ -29,17 +29,23 @@ function draw(svg, box, color='blue') {
 }
 */
 
-import Equation from "./components/equation.js";
-
+import Equation from "./components/equation.js"
+import InputMatrix from "./components/matrix.js"
 class App {
   constructor (target) {
-    let eq_obj = new Equation(target)
-    eq_obj.setState("$\\frac{1}{3}$")
+    let eq = document.createElement('div')
+    let mat = document.createElement('div')
+    target.appendChild(eq)
+    target.appendChild(mat)
+    let eq_obj = new Equation(eq)
+    eq_obj.setState({equation: "\\frac{1}{3}"})
+    let input_matrix = new InputMatrix(mat)
+    input_matrix.setState({data: [[1,0],[0,1]]})
   }
 }
 
 let target = document.getElementById('app')
-let app = new App(target)
+new App(target)
 
 /*
 let svg = document.getElementById('plot')

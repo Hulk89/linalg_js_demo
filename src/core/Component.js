@@ -1,25 +1,22 @@
 export default class Component {
-  $elem
+  $target
   $state
 
   constructor ($target) {
-    this.$elem = this.createElement()
-    $target.appendChild(this.$elem)
+    this.$target = $target
     this.setup()
     this.render()
-    this.setEvent()
   }
-  createElement() { return null}
   setup () {}
   template () { return ''}
   render () {
-    this.$elem.innerHTML = this.template()
+    this.$target.innerHTML = this.template()
   }
-  setEvent () {}
   setState (newState) {
     this.$state = { ...this.$state, ...newState }
     this.render()
   }
+  setEvent () {}
   /*
   addEvent (eventType, selector, callback) {
     const children = [ ...this.$target.querySelectorAll(selector) ]; 
