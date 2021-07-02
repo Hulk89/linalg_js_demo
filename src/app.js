@@ -53,7 +53,6 @@ class App {
     det_div.innerHTML = `determinant of matrix: ${det(data)}`
 
     input_matrix.setState({
-        title: "아래에 matrix를 입력하세요", 
         data: data, 
         callback: (data) => {
           eq_obj.setState({equation: matrix_to_latex(data)})

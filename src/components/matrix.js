@@ -2,14 +2,13 @@ import Component from "../core/Component.js"
 
 export default class InputMatrix extends Component {
   setup () {
-    this.$state = {title: '', data: [[1],[0]], callback: null}
+    this.$state = {data: [[1],[0]], callback: null}
   }
   template () {
-    let {title, data} = this.$state
+    let {data} = this.$state
 
     let str = `
-    <h2>${title}</h2>
-    <div id="matrix">
+    <div>
       ${data.map((row) =>
       `<div>
         ${row.map((point) => `<input type="text" value="${point}">`).join("")}
@@ -18,8 +17,7 @@ export default class InputMatrix extends Component {
     return str
   }
   setEvent () {
-    // TODO: querySelector -> getElementById
-    this.$target.querySelector('#matrix').addEventListener('change', () => {
+    this.$target.addEventListener('change', () => {
       const ncols = this.$state.data[0].length
 
       const children = Array.from(this.$target.getElementsByTagName('input'))
