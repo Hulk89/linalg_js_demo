@@ -31,16 +31,21 @@ function draw(svg, box, color='blue') {
 
 import Equation from "./components/equation.js"
 import InputMatrix from "./components/matrix.js"
+import {matrix_to_latex} from "./utils/array_to_latex.js"
+
 class App {
   constructor (target) {
     let eq = document.createElement('div')
     let mat = document.createElement('div')
     target.appendChild(eq)
     target.appendChild(mat)
+    
     let eq_obj = new Equation(eq)
-    eq_obj.setState({equation: "\\frac{1}{3}"})
     let input_matrix = new InputMatrix(mat)
-    input_matrix.setState({data: [[1,0],[0,1]]})
+
+    let data = [[1,0],[0,1]]
+    input_matrix.setState({data: data})
+    eq_obj.setState({equation: matrix_to_latex(data)})
   }
 }
 
@@ -51,18 +56,6 @@ new App(target)
 let svg = document.getElementById('plot')
 let src = document.getElementById('src')
 
-function to_matrix_latex_form(box) {
-  let str = ''
-  for (let i = 0 ; i < box.length ; i++) {
-    let point = box[i]
-    for (let j = 0 ; j < point.length ; j++) {
-      str += `${point[j]}`
-      if (j != point.length-1) str+= '&&'
-    }
-    if (i != box.length-1) str += ` \\\\ `
-  }
-  return '\\begin{bmatrix}' + str + '\\end{bmatrix}'
-}
 
 function matmul(mat1, mat2) {
   const m = mat1.length
@@ -83,7 +76,6 @@ function matmul(mat1, mat2) {
   }
   return res
 }
-src.innerText = 'rectangle: ' + '$' + to_matrix_latex_form(src_box) + '$'
 
 
 let apply_btn = document.getElementById('apply-btn')
