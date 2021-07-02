@@ -43,9 +43,17 @@ class App {
     let eq_obj = new Equation(eq)
     let input_matrix = new InputMatrix(mat)
 
-    let data = [[1,0],[0,1]]
-    input_matrix.setState({data: data})
+    let data = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
+
     eq_obj.setState({equation: matrix_to_latex(data)})
+
+    input_matrix.setState({
+        title: "아래에 matrix를 입력하세요", 
+        data: data, 
+        callback: (data) => {
+          eq_obj.setState({equation: matrix_to_latex(data)})
+        }
+      })
   }
 }
 
@@ -55,27 +63,6 @@ new App(target)
 /*
 let svg = document.getElementById('plot')
 let src = document.getElementById('src')
-
-
-function matmul(mat1, mat2) {
-  const m = mat1.length
-  const n = mat1[0].length
-  const r = mat2[0].length
-  
-  let res = []
-  for (let i = 0 ; i < m ; i++) {
-    let arr = []
-    for (let j = 0 ; j < r ; j++) {
-      let tmp = 0
-      for (let k = 0 ; k < n ; k++) {
-        tmp += mat1[i][k] * mat2[k][j]
-      }
-      arr.push(tmp)
-    }
-    res.push(arr)
-  }
-  return res
-}
 
 
 let apply_btn = document.getElementById('apply-btn')
