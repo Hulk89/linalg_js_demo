@@ -2,11 +2,12 @@ import Component from "../core/Component.js"
 
 export default class Equation extends Component {
   setup () {
-    this.$state = {equation: ""}
+    this.$state = {inline: false, equation: ""}
   }
   template () {
-    let {equation} = this.$state
-    return "$" + equation + "$"
+    let {inline, equation} = this.$state
+    if (inline) return '$' + equation + '$'
+    else return equation
   }
   render () {
     super.render()
