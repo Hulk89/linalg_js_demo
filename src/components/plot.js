@@ -2,7 +2,7 @@ import Component from "../core/Component.js"
 
 import Plotly from 'plotly.js/dist/plotly.min'
 
-function to_data(array, color='blue') {
+function to_volume(array, color='blue') {
   return {
     x: array[0],
     y: array[1],
@@ -15,6 +15,16 @@ function to_data(array, color='blue') {
     type: 'mesh3d'}
 }
 
+function to_points(array, color='blue') {
+  return {
+    x: array[0],
+    y: array[1],
+    z: array[2],
+    color: color,
+    opacity: 0.5,
+    type: 'scatter3d'}
+}
+
 export default class Plot3D extends Component {
   setup () {
     this.$state = {data:[], height: 480, width: 600, title: ""}
@@ -24,7 +34,7 @@ export default class Plot3D extends Component {
     let layout = {}
     layout = {...layout, ...{height, width, title}}
     Plotly.newPlot(this.$target,
-                   data.map((d) => to_data(d.data,d.color)),
+                   data.map((d) => to_points(d.data, d.color)).concat(data.map((d) => to_volume(d.data, d.color))),
                    layout) 
   }
 }

@@ -5,6 +5,7 @@ import Plot from "./components/plot.js"
 import {matrix_to_latex} from "./utils/array_to_latex.js"
 import {det, matmul} from "./utils/matrix.js"
 
+/* TODO: Add state manager and add example buttons*/
 class App {
   constructor (target) {
     let plot_div = document.createElement('div')
@@ -27,6 +28,7 @@ class App {
     let arr = [[0, 0, 1, 1, 0, 0, 1, 1],
                [0, 1, 1, 0, 0, 1, 1, 0],
                [0, 0, 0, 0, 1, 1, 1, 1]]
+
     let arr2 = matmul(data, arr)
     let plot_data = [{data:arr, color:'blue'}, {data:arr2, color:'green'}]
 
