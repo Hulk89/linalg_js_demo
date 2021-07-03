@@ -27,3 +27,26 @@ function deleteRowAndColumn(M,index) {
 export function transpose (box) {
   return box[0].map((_, colIndex) => box.map(row => row[colIndex]))
 }
+
+export function matmul(mat1, mat2) {
+  /* mat1 : m x n matrix 
+   * mat2 : n x r matrix
+   */
+  const m = mat1.length
+  const n = mat1[0].length
+  const r = mat2[0].length
+  
+  let res = []
+  for (let i = 0 ; i < m ; i++) {
+    let arr = []
+    for (let j = 0 ; j < r ; j++) {
+      let tmp = 0
+      for (let k = 0 ; k < n ; k++) {
+        tmp += mat1[i][k] * mat2[k][j]
+      }
+      arr.push(tmp)
+    }
+    res.push(arr)
+  }
+  return res
+}

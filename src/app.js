@@ -3,7 +3,7 @@ import InputMatrix from "./components/matrix.js"
 import Plot from "./components/plot.js"
 
 import {matrix_to_latex} from "./utils/array_to_latex.js"
-import {det, transpose} from "./utils/matrix.js"
+import {det, matmul} from "./utils/matrix.js"
 
 class App {
   constructor (target) {
@@ -19,28 +19,30 @@ class App {
     
     let plot = new Plot(plot_div)
     let eq = new Equation(eq_div)
+    eq.setState({inline: true})
     let input_matrix = new InputMatrix(mat_div)
 
-    let data = [[1, 0, 0, 0],[0, 1, 0, 0],[0, 0, 1, 0], [0, 0, 0, 1]]
+    let data = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
     
     let arr = [[0, 0, 1, 1, 0, 0, 1, 1],
                [0, 1, 1, 0, 0, 1, 1, 0],
                [0, 0, 0, 0, 1, 1, 1, 1]]
-    let arr2 = [[1,1,2,2,1,1,2,2],
-                [1,2,2,1,1,2,2,1],
-                [1,1,1,1,2,2,2,2]]
-
+    let arr2 = matmul(data, arr)
     let plot_data = [{data:arr, color:'blue'}, {data:arr2, color:'green'}]
-    console.log(plot_data)
 
     plot.setState({data:plot_data, title:"3D view"})
-    eq.setState({equation: matrix_to_latex(data)})
+    eq.setState({equation: `${matrix_to_latex(arr2)} = ${matrix_to_latex(data)} \\times ${matrix_to_latex(arr)}`})
     det_div.innerHTML = `determinant of matrix: ${det(data)}`
 
     input_matrix.setState({
         data: data, 
         callback: (data) => {
-          eq.setState({equation: matrix_to_latex(data)})
+          let arr2 = matmul(data, arr)
+          let plot_data = [{data:arr, color:'blue'}, {data:arr2, color:'green'}]
+
+          plot.setState({data:plot_data, title:"3D view"})
+
+          eq.setState({equation: `${matrix_to_latex(arr2)} = ${matrix_to_latex(data)} \\times ${matrix_to_latex(arr)}`})
           det_div.innerHTML = `determinant of matrix: ${det(data)}`
         }
       })
