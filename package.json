@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "ify-loader": "^1.1.0",
+    "lodash": "^4.17.21",
     "plotly.js": "^2.2.0"
   }
 }

@@ -1,3 +1,5 @@
+import {merge} from 'lodash'
+
 export default class Component {
   $target
   $state
@@ -14,7 +16,7 @@ export default class Component {
     this.$target.innerHTML = this.template()
   }
   setState (newState) {
-    this.$state = { ...this.$state, ...newState }
+    this.$state = merge(this.$state, newState)
     this.render()
   }
   setEvent () {}
