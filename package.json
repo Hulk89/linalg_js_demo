@@ -12,8 +12,13 @@
   "license": "ISC",
   "devDependencies": {
     "html-webpack-plugin": "^5.3.2",
+    "transform-loader": "^0.2.4",
     "webpack": "^5.41.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "ify-loader": "^1.1.0",
+    "plotly.js": "^2.2.0"
   }
 }
