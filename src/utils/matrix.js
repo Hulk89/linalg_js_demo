@@ -24,3 +24,6 @@ function deleteRowAndColumn(M,index) {
   } 
   return temp
 }
+export function transpose (box) {
+  return box[0].map((_, colIndex) => box.map(row => row[colIndex]))
+}
