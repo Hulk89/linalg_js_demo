@@ -1,6 +1,6 @@
 import Equation from "./components/equation.js"
 import InputMatrix from "./components/matrix.js"
-import Plot from "./components/plot.js"
+import Plot3D from "./components/plot.js"
 
 import {matrix_to_latex} from "./utils/array_to_latex.js"
 import {det, matmul} from "./utils/matrix.js"
@@ -10,19 +10,24 @@ class App {
 
   constructor (target) {
     let plot_div = document.createElement('div')
+    let eq_description = document.createElement('p')
     let eq_div = document.createElement('div')
     let det_div = document.createElement('div')
     let mat_div = document.createElement('div')
 
     target.append(plot_div)
+    target.append(eq_description)
     target.appendChild(eq_div)
     target.append(det_div)
     target.appendChild(mat_div)
     
-    let plot = new Plot(plot_div)
+    let plot = new Plot3D(plot_div)
     let eq = new Equation(eq_div)
-    eq.setState({inline: true})
     let input_form = new InputMatrix(mat_div)
+
+    eq_description.innerHTML = 'destination points = matrix * source points'
+
+    eq.setState({inline: true})
 
     let m = [[1, 0, 0],
              [0, 1, 0],
@@ -36,6 +41,9 @@ class App {
       {m: [[1,0,0],[0,1,0],[0,0,1]], desc: "identity matrix"},
       {m: [[1,0,1],[0,1,0],[1,0,1]], desc: "determinant 0(rank=2)"},
       {m: [[1,1,1],[1,1,1],[1,1,1]], desc: "determinant 0(rank=1)"},
+      {m: [[0.707, -0.707, 0], [0.707, 0.707, 0], [0, 0, 1]], desc: "rotation(xy-plane)"},
+      {m: [[1, 0, 0], [0, 0.707, -0.707], [0, 0.707, 0.707]], desc: "rotation(yz-plane)"},
+      {m: [[0.707, 0, -0.707], [0, 1, 0], [0.707, 0, 0.707]], desc: "rotation(xz-plane)"},
     ]
 
     this.$state = {
