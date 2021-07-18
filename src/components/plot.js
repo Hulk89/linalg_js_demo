@@ -29,6 +29,7 @@ export default class Plot3D extends Component {
   setup () {
     this.$state = {data:[], height: 480, width: 600, title: ""}
   }
+  /* Plotly는 직접 target element를 조작하므로 template를 쓰지 않고 직접 render함수를 바꾸게 되었다. */
   render () {
     let {data, height, width, title} = this.$state
     let layout = {}
