@@ -10,15 +10,25 @@ export default class Component {
     this.setEvent()
     this.render()
   }
+  /* 처음 상태를 관리한다. */
   setup () {}
+  
+  /* innerHTML에 넣을 코드를 의미함 */
   template () { return ''}
+
+  /* rendering 함수. setState 시 무조건 불려야한다. */
   render () {
     this.$target.innerHTML = this.template()
   }
+  /* state를 새로 바꾸면 꼭 이 함수를 통해서 바뀌어야한다. */
   setState (newState) {
     this.$state = merge(this.$state, newState)
     this.render()
   }
+
+  /* event를 세팅한다. 가능하면 event bubbling을 통해서 처리할 수 있도록 하자.
+   * src/components/matrix.js 를 참조..
+   */
   setEvent () {}
   /*
   addEvent (eventType, selector, callback) {
